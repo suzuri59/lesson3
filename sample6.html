@@ -34,10 +34,10 @@
   var mat = new THREE.MeshPhongMaterial();
   mat.map = texture;
   
-  // バンプマップ読み込み
-//   var bump = textureLoader.load("ice-bump3.jpg");
-//   mat.bumpMap = bump;
-//   mat.bumpscale = 0.02;
+  //バンプマップ読み込み
+  var bump = textureLoader.load("ice-bump3.jpg");
+  mat.bumpMap = bump;
+  mat.bumpscale = 0.02;
 
   // 箱を作成
   var geometry = new THREE.BoxGeometry(1, 1, 1);
