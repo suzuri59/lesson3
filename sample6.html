@@ -49,13 +49,13 @@
         scene.add(directionalLight2);
 
    // テクスチャー読み込み
-   const textureLoader = new THREE.TextureLoader();  
-   const texture = textureLoader.load("ice.jpg");
-  const mat = new THREE.MeshPhongMaterial();
+   var textureLoader = new THREE.TextureLoader();  
+   var texture = textureLoader.load("ice.jpg");
+  var mat = new THREE.MeshPhongMaterial();
   mat.map = texture;
   
   //バンプマップ読み込み
-  const bump = textureLoader.load("ice-bump3.jpg");
+  var bump = textureLoader.load("ice-bump3.jpg");
   mat.bumpMap = bump;
   mat.bumpscale = 0.02;
 
