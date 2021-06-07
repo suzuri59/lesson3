@@ -28,6 +28,9 @@
   
     // カメラを作成
   var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+    
+    // カメラコントローラーを作成
+  var controls = new THREE.OrbitControls(camera, document.body);
 
 // テクスチャー読み込み
 var textureLoader = new THREE.TextureLoader();  
@@ -67,7 +70,12 @@ var update = function() {
   box.rotation.x += 0.01;
   box.rotation.y += 0.01;
 
-  renderer.render(scene, camera);
+  tick();
+  function tick() {
+          // レンダリング
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
 };
 update();
 }
