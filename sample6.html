@@ -58,6 +58,7 @@
         scene.add(box);
 
         tick();
+        update();
 
         // 毎フレーム時に実行されるループイベントです
         function tick() {
@@ -65,6 +66,14 @@
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
         }
+        
+        var update = function() {
+          requestAnimationFrame(update);
+         // 箱を回転させる
+         box.rotation.x += 0.01;
+         box.rotation.y += 0.01;
+        };
+        
       }
     </script>
   </head>
