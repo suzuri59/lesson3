@@ -1,43 +1,35 @@
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>sample_bump</title>
-
-  <!-- three.jsを読み込む(ローカル) -->
-  <!-- <script src="./three.js"></script> -->
-  <!-- three.jsを読み込む(CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
-  <script src="js/controls/OrbitControls.js"></script>
-  
- <script>
-   // ページの読み込みを待つ
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script>
+      // ページの読み込みを待つ
       window.addEventListener('load', init);
 
-  function init() {
+      function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
 
-    const width = 800,
-        height = 600;
-  
-    // レンダラーを作成
-    const renderer = new THREE.WebGLRenderer();
-      canvas: document.querySelector('#myCanvas')
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#myCanvas')
         });
         renderer.setSize(width, height);
-    renderer.setSize(width, height);
-  
-  
-    // シーンを作成
-    const scene = new THREE.Scene();
-  
-    // カメラを作成
-   const camera = new THREE.PerspectiveCamera(45, width / height);
+
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
         // カメラの初期座標を設定
         camera.position.set(0, 0, 1000);
 
         // カメラコントローラーを作成
         const controls = new THREE.OrbitControls(camera,document.body);
-   
-   // 平行光源1
+ 
+                // 平行光源1
         var directionalLight1 = new THREE.DirectionalLight(0xffffff);
         directionalLight1.position.set(100, 100, 100);
         // シーンに追加
@@ -48,26 +40,13 @@
         // シーンに追加
         scene.add(directionalLight2);
 
-   // テクスチャー読み込み
-   var textureLoader = new THREE.TextureLoader();  
-   var texture = textureLoader.load("ice.jpg");
-  var mat = new THREE.MeshPhongMaterial();
-  mat.map = texture;
-  
-  //バンプマップ読み込み
-  var bump = textureLoader.load("ice-bump3.jpg");
-  mat.bumpMap = bump;
-  mat.bumpscale = 0.02;
+        // 箱を作成(原点に作成)
+        var geometry = new THREE.BoxGeometry(300, 300, 300);
+        var material = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+        var box = new THREE.Mesh(geometry, material);
+        scene.add(box);
 
-  // 箱を作成
-  var geometry = new THREE.BoxGeometry(1, 1, 1);
-  //var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
-  //var box = new THREE.Mesh(geometry, material);
-  var box = new THREE.Mesh(geometry, mat);
-  box.position.z = -5;
-  scene.add(box);
-
-  tick();
+        tick();
 
         // 毎フレーム時に実行されるループイベントです
         function tick() {
@@ -76,11 +55,9 @@
           requestAnimationFrame(tick);
         }
       }
-
- 
-</script>
-</head>
-<body>
+    </script>
+  </head>
+  <body>
     <canvas id="myCanvas"></canvas>
-</body>
+  </body>
 </html>
